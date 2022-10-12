@@ -1,6 +1,5 @@
 @extends('templates')
 @section('content')
-    
     <div class="p-10 flex justify-center">
         <div class="card w-8/12 bg-base-100 shadow-xl">
             @include('students-page.error-form')
@@ -28,7 +27,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button class="btn rounded-lg" type="submit">Add</button>
+                <button class="btn rounded-lg btn-accent text-white" type="submit">Add</button>
             </form>
         </div>
     @endsection

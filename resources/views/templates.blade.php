@@ -10,7 +10,7 @@
     <link rel="canonical" href="/login">
     <link rel="shortcut icon" type="image/jpg" href="" />
 
-    <title>Sekolah App</title>
+    <title>{{ config('app.name')}}</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -58,7 +58,9 @@
         </div> --}}
     </div>
     <!-- content blade laravel -->
-    @yield('content')
+    <div class="container mx-auto">
+        @yield('content')
+    </div>
 </body>
 
 </html>

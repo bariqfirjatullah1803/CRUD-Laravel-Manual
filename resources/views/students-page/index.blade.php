@@ -3,16 +3,19 @@
 @section('content')
     <div class="p-10">
         <div class="card w-auto bg-base-100 shadow-xl">
-            <div class="card-body">
+            @include('students-page.error-form')
+            <div class="card-body pt-0">
                 <div class="overflow-x-auto">
-                    <a href="{{ route('students.create') }}" class="btn btn-accent text-white px-10 rounded-full my-5">+ Add</a>
-                    <table class="table table-compact w-full">
+                    <a href="{{ route('students.create') }}" class="btn btn-accent text-white px-10 rounded-full shadow-md my-5">+
+                        Add</a>
+                    <table class="table table-compact w-full text-center mb-5">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>NIS</th>
                                 <th>Name</th>
                                 <th>Majors</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -22,6 +25,13 @@
                                     <td>{{ $item->nis }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->majors->name }}</td>
+                                    <td>
+                                        <form action="" method="post">
+                                            @csrf
+                                            <button class="btn btn-warning btn-sm btn-outline">Edit</button>
+                                        </form>
+                                        <button class="btn btn-error btn-sm btn-outline">Delete</button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

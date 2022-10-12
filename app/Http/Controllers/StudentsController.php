@@ -15,7 +15,7 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        $data = Students::paginate(3);
+        $data = Students::orderByDesc('id')->paginate(10);
         // dd($data);
         return view('students-page.index',compact('data'));
     }
@@ -39,13 +39,15 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
+        $request->validate([
             'nis' => 'required|integer|unique:students',
             'name' => 'required',
-            'nis' => 'required|integer|unique:students',
         ]);
         
-        dd($request);
+        Students::create($request->all());
+
+        return redirect()->route('students.index')
+        ->with('success','Product created successfully.');        // $students = $request;
     }
 
     /**
