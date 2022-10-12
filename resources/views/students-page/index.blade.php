@@ -6,7 +6,8 @@
             @include('students-page.error-form')
             <div class="card-body pt-0">
                 <div class="overflow-x-auto">
-                    <a href="{{ route('students.create') }}" class="btn btn-accent text-white px-10 rounded-full shadow-md my-5">+
+                    <a href="{{ route('students.create') }}"
+                        class="btn btn-accent text-white px-10 rounded-full shadow-md my-5">+
                         Add</a>
                     <table class="table table-compact w-full text-center mb-5">
                         <thead>
@@ -25,12 +26,13 @@
                                     <td>{{ $item->nis }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->majors->name }}</td>
-                                    <td>
-                                        <form action="" method="post">
+                                    <td class="flex justify-center">
+                                        <a href="{{ route('students.edit',$item->id) }}" class="btn btn-warning btn-sm btn-outline">Edit</a>
+                                        <form action="{{ route('students.destroy',$item->id) }}" method="post">
                                             @csrf
-                                            <button class="btn btn-warning btn-sm btn-outline">Edit</button>
+                                            @method('delete')
+                                            <button class="btn btn-error btn-sm btn-outline">Delete</button>
                                         </form>
-                                        <button class="btn btn-error btn-sm btn-outline">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach

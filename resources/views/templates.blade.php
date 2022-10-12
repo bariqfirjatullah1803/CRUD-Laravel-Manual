@@ -35,7 +35,7 @@
 <body>
     <div class="navbar bg-base-100 drop-shadow-lg px-10">
         <div class="flex-1">
-            <a class="btn btn-ghost normal-case text-xl">Sekolah App</a>
+            <a href="{{ route('students.index') }}" class="btn btn-ghost normal-case text-xl">Sekolah App</a>
         </div>
         {{-- <div class="flex-none">
             <ul class="menu menu-horizontal p-0">

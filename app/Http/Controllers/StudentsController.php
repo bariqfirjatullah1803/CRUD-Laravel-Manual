@@ -17,7 +17,7 @@ class StudentsController extends Controller
     {
         $data = Students::orderByDesc('id')->paginate(10);
         // dd($data);
-        return view('students-page.index',compact('data'));
+        return view('students-page.index', compact('data'));
     }
 
     /**
@@ -28,7 +28,7 @@ class StudentsController extends Controller
     public function create()
     {
         $data = Majors::all();
-        return view('students-page.create',compact('data'));
+        return view('students-page.create', compact('data'));
     }
 
     /**
@@ -43,11 +43,11 @@ class StudentsController extends Controller
             'nis' => 'required|integer|unique:students',
             'name' => 'required',
         ]);
-        
+
         Students::create($request->all());
 
         return redirect()->route('students.index')
-        ->with('success','Product created successfully.');        // $students = $request;
+            ->with('success', 'Product created successfully.');        // $students = $request;
     }
 
     /**
@@ -67,9 +67,12 @@ class StudentsController extends Controller
      * @param  \App\Models\Students  $students
      * @return \Illuminate\Http\Response
      */
-    public function edit(Students $students)
+    public function edit($id)
     {
-        //
+        $data['students'] = Students::findOrFail($id);
+        $data['majors'] = Majors::all();
+        return view('students-page.edit', compact('data'));
+        // dd($students);
     }
 
     /**
@@ -79,9 +82,17 @@ class StudentsController extends Controller
      * @param  \App\Models\Students  $students
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Students $students)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nis' => 'required|integer',
+            'name' => 'required',
+        ]);
+        $students = Students::findOrFail($id);
+        $students->update($request->all());
+
+        return redirect()->route('students.index')
+            ->with('success', 'Student update successfully.');
     }
 
     /**
@@ -90,8 +101,10 @@ class StudentsController extends Controller
      * @param  \App\Models\Students  $students
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Students $students)
+    public function destroy($id)
     {
-        //
-    }
+        $students = Students::findOrFail($id);
+        $students->delete();
+        return redirect()->route('students.index')
+        ->with('success','Student delete successfully.');    }
 }
