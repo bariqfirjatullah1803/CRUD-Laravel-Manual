@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\StudentsAPIController;
+use App\Models\Students;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('data', function(){
+    return[
+        'data' => 'data api'
+    ];
+});
+Route::resource('students', StudentsAPIController::class);
